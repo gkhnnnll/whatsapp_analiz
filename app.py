@@ -190,5 +190,5 @@ def upload_file():
         chat_analysis = analyze_chat_advanced(all_messages)
         return jsonify({ 'messages': all_messages, 'analysis': chat_analysis })
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
