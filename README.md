@@ -2,10 +2,6 @@
 
 Bu proje, dışa aktarılmış WhatsApp sohbet `.txt` dosyalarını analiz etmek ve görselleştirmek için geliştirilmiş bir Python Flask web uygulamasıdır. Kullanıcıların sohbet geçmişlerini interaktif bir arayüzde görüntülemelerine ve sohbet dinamikleri, mesajlaşma alışkanlıkları ve daha fazlası hakkında derinlemesine bilgi edinmelerine olanak tanır.
 
-![Uygulama Arayüzü](https://i.imgur.com/your-screenshot-url.png)
-*(Not: Bu ekran görüntüsü linkini, uygulamanın kendi ekran görüntüsüyle değiştirebilirsin.)*
-
----
 
 ## 🚀 Özellikler
 
@@ -46,7 +42,6 @@ Uygulama, hem görsel hem de analitik olarak zengin bir dizi özellik sunar:
 - **Doğal Dil İşleme:** vaderSentiment (Duygu Analizi için)
 - **WSGI Sunucusu:** Waitress
 
----
 
 ## 💻 Kurulum ve Yerel Makinede Çalıştırma
 
