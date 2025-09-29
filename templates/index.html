@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Sohbet Analizi</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='whatsapp.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="helpModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button id="closeHelpModal" class="modal-close-btn">&times;</button>
+            <h2>Nasıl Kullanılır?</h2>
+            <p>Bu araç, dışa aktardığınız WhatsApp sohbet `.txt` dosyalarınızı görüntülemenizi ve analiz etmenizi sağlar.</p>
+            <h4>Adım 1: Sohbeti Dışa Aktarma</h4>
+            <ul>
+                <li>İstediğiniz sohbete girin (bireysel veya grup).</li>
+                <li><strong>Android:</strong> Sağ üstteki üç noktaya, ardından "Diğer" > "Sohbeti dışa aktar" > "Medya eklemeden" seçeneklerine dokunun.</li>
+                <li><strong>iOS:</strong> Sohbet ismine, ardından "Sohbeti Dışa Aktar" > "Medya Ekleme" seçeneklerine dokunun.</li>
+                <li>Oluşturulan <code>.txt</code> dosyasını bilgisayarınıza kaydedin.</li>
+            </ul>
+            <h4>Adım 2: Dosyayı Yükleme</h4>
+            <p>Soldaki panelden "Sohbeti Yükle ve Analiz Et" butonunu kullanarak bilgisayarınızdaki <code>.txt</code> dosyasını seçin.</p>
+            <h4>Adım 3: Analiz ve Keşif</h4>
+            <p>Sohbetiniz yüklendikten sonra sol panelde detaylı analizleri, sağ panelde ise sohbetin kendisini görebilirsiniz. Arama, filtreleme ve tarihe gitme gibi özellikleri kullanarak sohbetinizi keşfedin!</p>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <button class="sidebar-close-btn" id="sidebarCloseBtn">&times;</button>
+                <div class="title-container">
+                    <img src="{{ url_for('static', filename='whatsapp.png') }}" alt="Logo" class="header-logo">
+                    <h1>Sohbet Analizi</h1>
+                </div>
+                <div class="header-controls">
+                    <div class="theme-switcher">
+                        <span id="theme-label">Koyu Tema</span>
+                        <label class="switch">
+                            <input type="checkbox" id="themeToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <button id="helpBtn" class="help-button">?</button>
+                </div>
+                <button id="printReportBtn" class="print-button">Raporu Yazdır/PDF Kaydet</button>
+            </div>
+            
+            <div class="file-uploader">
+                <div id="upload-section">
+                    <p>Görüntülemek için WhatsApp .txt dosyanızı seçin:</p>
+                    <input type="file" id="chatFileInput" accept=".txt">
+                    <button id="viewChatBtn">Sohbeti Yükle ve Analiz Et</button>
+                </div>
+                <div id="clear-section" style="display: none;">
+                    <p>Hafızada bir sohbet kaydı bulundu.</p>
+                    <button id="clearChatBtn" class="clear-button">Kaydı Sil ve Yeni Sohbet Yükle</button>
+                </div>
+            </div>
+
+            <div class="filters-container" style="display: none;">
+                <h3>Arama & Filtre</h3>
+                <input type="search" id="keywordSearch" placeholder="Mesajlarda ara...">
+                <div id="search-nav-container" style="display: none;">
+                    <span id="searchResultCount"></span>
+                    <div class="search-buttons">
+                        <button id="prevResultBtn" title="Önceki Sonuç">▲</button>
+                        <button id="nextResultBtn" title="Sonraki Sonuç">▼</button>
+                    </div>
+                </div>
+                <div class="date-filters">
+                    <input type="date" id="startDate">
+                    <input type="date" id="endDate">
+                </div>
+                <button id="filterBtn">Filtrele</button>
+                <button id="resetFilterBtn">Sıfırla</button>
+            </div>
+
+            <div id="analysis-container">
+            </div>
+        </div>
+        <div class="chat-window">
+            <div class="chat-header">
+                <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                <div class="chat-header-actions">
+                    <div class="go-to-date">
+                        <label for="datePicker">Tarihe Git:</label>
+                        <input type="date" id="datePicker">
+                        <button id="goToDateBtn">Git</button>
+                    </div>
+                    <div class="on-this-day">
+                        <button id="onThisDayBtn" title="O Gün Bugün Geçmişte Ne Konuştunuz?">📅</button>
+                    </div>
+                    <div class="random-date">
+                        <button id="randomDateBtn" title="Sizi Mesaj Olan Rastgele Bir Güne Götürür">🎲</button>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-background"></div>
+            <div id="chat-container">
+                <div class="placeholder">
+                    <h2>Başlamak için lütfen bir sohbet dosyası yükleyin veya hafızadaki sohbetin yüklenmesini bekleyin.</h2>
+                </div>
+            </div>
+             <div id="loader" class="loader-container">
+                <div class="spinner"></div>
+                <p id="loader-text"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
